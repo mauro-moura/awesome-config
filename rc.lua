@@ -70,19 +70,19 @@ end
 run_once({
     "unclutter -root",
     --'picom',
-    --'nm-applet --indicator', -- wifi
+    'nm-applet --indicator', -- wifi
     'pnmixer', -- shows an audiocontrol applet in systray when installed.
     'blueberry-tray', -- Bluetooth tray icon
     'numlockx on', -- enable numlock
     '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
     'xbacklight',
-    --'xfce4-power-manager', -- Power manager
-     --'steam -silent',
+    'xfce4-power-manager', -- Power manager
+    --'steam -silent',
     --'feh --randomize --bg-fill ~/.wallpapers/*',
     --'/usr/bin/variety',
     'setxkbmap -layout "br, us" -option "grp:alt_shift_toggle"',
     'insync start',
-    'dropbox'
+    --'dropbox'
 }) -- comma-separated entries
 
 -- This function implements the XDG autostart specification
@@ -117,7 +117,7 @@ local terminal     = "terminator"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
-local browser      = "brave"
+local browser      = "google-chrome-stable"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "Web", "Code", "Chat", "Files", "Other" }
@@ -417,6 +417,8 @@ globalkeys = mytable.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ "Control",           }, "Escape", function () awful.spawn("xkill") end,
+              {description = "open xkill", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome_gnome_quit,
